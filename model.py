@@ -11,8 +11,6 @@ from tensorflow.keras.layers import Dense, MaxPooling2D, Conv2D, Dropout, Flatte
 from keras.callbacks import ModelCheckpoint
 
 
-path = "../facial-keypoints-detection/training/training.csv"
-data, label = get_train_data(path)
 # print(label)
 
 
@@ -62,7 +60,7 @@ def model_training(model):
 
 
 def loading_trained_model(model):
-    model.load_weights('weights/checkpoint-100.hdf5')
+    model.load_weights('weights/checkpoint-200.hdf5')
 
 
 def model_testing(model, img_path):
@@ -72,5 +70,8 @@ def model_testing(model, img_path):
     visualize_points_img(img=img, points=prediction[0])
 
 
-model = my_model()
-model_training(model)
+if __name__ == "__main__":
+    path = "../facial-keypoints-detection/training/training.csv"
+    data, label = get_train_data(path)
+    model = my_model()
+    model_training(model)
