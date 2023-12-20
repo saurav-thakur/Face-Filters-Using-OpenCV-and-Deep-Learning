@@ -51,8 +51,6 @@ def my_model():
     model.compile(optimizer='adam',
                   loss="mean_absolute_error", metrics=["mse"])
 
-    print(model.summary())
-
     return model
 
 
