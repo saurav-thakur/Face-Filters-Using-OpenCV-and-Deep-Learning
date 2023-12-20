@@ -1,4 +1,5 @@
 import os
+import csv
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
@@ -56,7 +57,30 @@ def my_model():
 def model_training(model):
     checkpoint = ModelCheckpoint(
         filepath="weights/checkpoint-{epoch:02d}.hdf5")
-    model.fit(data, label, epochs=200, batch_size=100, callbacks=[checkpoint])
+    epochs = 10
+    history = model.fit(data, label, epochs=epochs, validation_split=0.2,
+                        batch_size=100, callbacks=[checkpoint])
+
+    history_dict = history.history
+
+    loss = history_dict['loss']
+    mse = history_dict['mse']
+    val_mse = history_dict['val_mse']
+    val_loss = history_dict['val_loss']
+
+    # # Access accuracy and loss values from history
+    epoch_numbers = range(1, epochs + 1)
+    csv_columns = ['epoch', 'loss',
+                   'mse', 'val_mse', 'val_loss']
+    csv_data = zip(epoch_numbers, loss, mse, val_mse, val_loss)
+
+    csv_file_path = 'model_tracking/training_metrics.csv'
+    with open(csv_file_path, 'w', newline='') as csv_file:
+        writer = csv.writer(csv_file)
+        writer.writerow(csv_columns)
+        writer.writerows(csv_data)
+
+    print(f"Training metrics saved to {csv_file_path}")
 
 
 def loading_trained_model(model):
