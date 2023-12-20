@@ -51,6 +51,8 @@ def my_model():
     model.compile(optimizer='adam',
                   loss="mean_absolute_error", metrics=["mse"])
 
+    print(model.summary())
+
     return model
 
 
@@ -96,6 +98,6 @@ def model_testing(model, img_path):
 
 if __name__ == "__main__":
     path = "../facial-keypoints-detection/training/training.csv"
-    data, label = get_train_data(path)
+    # data, label = get_train_data(path)
     model = my_model()
-    model_training(model)
+    # model_training(model)

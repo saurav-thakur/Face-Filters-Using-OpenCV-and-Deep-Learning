@@ -20,7 +20,6 @@ To run this project, first you will need to install necessary libraries and then
 
 ```
 python main.py
-
 ```
 
 If you want to retrain the model, run:
@@ -28,3 +27,7 @@ If you want to retrain the model, run:
 ```
 python model.py
 ```
+
+## Model architecture used in this project
+
+![Alt text](model_architecture.png)
